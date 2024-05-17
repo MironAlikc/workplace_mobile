@@ -5,13 +5,13 @@ import 'package:workplace_mobile/core/theme/app_fonts.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
-    // required this.lable,
     required this.icon,
     required this.onChanged,
     required this.controller,
     required this.hintText,
     this.isPassword = false,
     required this.onIconPress,
+    this.errorText,
   });
   final TextEditingController controller;
   final String hintText;
@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
   final Function(String) onChanged;
   final bool isPassword;
   final Function() onIconPress;
-  //final String lable;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,7 @@ class CustomTextField extends StatelessWidget {
       style: AppFonts.s16w400,
       controller: controller,
       decoration: InputDecoration(
+        errorText: errorText,
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.white),
         ),
