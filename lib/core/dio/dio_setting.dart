@@ -10,14 +10,9 @@ class DioSettings {
 
   Dio dio = Dio(
     BaseOptions(
-      baseUrl: '',
-      // 'https://api.mindbodyonline.com/public/v${AppConsts.apiVersion}/',
+      baseUrl: 'https://sndbox.avn.kg/wp/api/mobile/v1/',
       contentType: 'application/json',
-      headers: {
-        'Content-Type': 'application/json',
-        // 'SiteId': AppConsts.siteId,
-        // 'Api-Key': AppConsts.apiKey,
-      },
+      headers: {'Content-Type': 'application/json'},
       connectTimeout: const Duration(seconds: 40),
       receiveTimeout: const Duration(seconds: 40),
     ),
@@ -29,8 +24,11 @@ class DioSettings {
     interceptors.cast();
 
     final logInterceptor = LogInterceptor(
+      request: true,
       requestBody: true,
+      requestHeader: true,
       responseBody: true,
+      responseHeader: true,
     );
     final headerInterceptors = QueuedInterceptorsWrapper(
       onRequest: (options, handler) => handler.next(options),
@@ -42,5 +40,6 @@ class DioSettings {
       },
     );
     interceptors.addAll([if (kDebugMode) logInterceptor, headerInterceptors]);
+    
   }
 }
